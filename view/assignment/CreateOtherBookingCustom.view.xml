@@ -1,0 +1,133 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m"
+	controllerName="mrs.resourcemanagement.view.assignment.CreateOtherBooking" xmlns:help="mrs.resourcemanagement.control.MoreHelpControl"
+	xmlns:custom="mrs.resourcemanagement.control" height="100%">
+	<core:ExtensionPoint name="OtherBookingTop"/>
+	<VBox alignItems="Start">
+		<VBox class="assignmentCreateRootContainer">
+			<HBox>
+				<core:Icon src="sap-icon://appointment" class="assignmentHeaderIcon"></core:Icon>
+				<VBox class="assignmentHeaderBox">
+					<Label text="{i18n>ASSIGNMENT_OTHER_TIMESPEC_TYPE}" class="assignmentOtherBookingHeaderText" required="true"/>
+					<custom:select.Select id="otherBookingTypeSelection" class="requestCreateRequestSelect borderDropDown" width="50%" change="setAssignment"
+						items="{path: '/TimespecTypeValueListSet', filters:{path:'ResourceType', operator: 'EQ', value1:'00'}}">
+						<core:Item key="{VALUELISTKEY}" text="{VALUEDESCRIPTION}"/>
+					</custom:select.Select>
+					<custom:select.Select id="otherBookingTypeSelectionNN" change="setAssignment" class="requestCreateRequestSelect borderDropDown" width="50%"
+						items="{path: '/TimespecTypeValueListSet', filters:{path:'ResourceType', operator: 'EQ', value1:'02'}}"
+						visible="{= ${CandidateModel>/PersonSet/ResourceType} === '02' ? true : false }">
+						<core:Item key="{VALUELISTKEY}" text="{VALUEDESCRIPTION}"/>
+					</custom:select.Select>
+					<Label class="assignmentHeaderDescription opacityLow opacityLowBlueTheme" textAlign="Begin"
+						text="{i18n>ASSIGNMENT_OTHER_BOOKING_DESCRIPTION}"></Label>
+					<CheckBox id="check2" text="Show as available" class="bottomCheckbox sapUiLargeMarginEnd assignmentDetailsTextRightPadding" selected="{path : 'AssignmentModel>/ShowAsAvailable'}"/>
+				</VBox>
+			</HBox>
+			<core:ExtensionPoint name="OtherBookingBeforeDates"/>
+			<VBox class="assignmentCreateSectionContainer">
+				<HBox width="46rem" height="100%">
+					<VBox justifyContent="SpaceBetween" alignItems="Stretch" class="formVbox" width="70%" height="110%">
+						<VBox class="startEndDateVbox">
+							<Label text="{i18n>REQUEST_CANDIDATE_PROPOSED_START_TO_END_DATE}" required="true"/>
+							<DateRangeSelection valueStateText="{i18n>ENTER_VALID_DATE_RANGE_ERROR}" id="otherBookingStartEndDate"
+								delimiter="{i18n>START_END_DATE_DELIMITER}" dateValue="{OtherBookingModel>/StartDate}" secondDateValue="{OtherBookingModel>/EndDate}"
+								placeholder="{i18n>REQUEST_START_END_DATE_PLACEHOLDER}" width="17em" change="updateAssignmentModel"/>
+						</VBox>
+						<VBox>
+							<HBox class="bottomHbox">
+								<CheckBox id="check1" text="{i18n>MULTI_BOOKING_RECUR}" class="bottomCheckbox sapUiLargeMarginEnd assignmentDetailsTextRightPadding"
+									selected="{path: 'OtherBookingModel>/isVisible'}" select="onRecurCheckboxPress" visible="{path: 'OtherBookingModel>/isRecurVisible'}"/>
+								<Label text="{i18n>OTHER_BOOKING_EVERY}" class="recurCheckboxLabel" visible="{path: 'OtherBookingModel>/isVisible'}"/>
+								<Input type="Number" width="6rem" visible="{path: 'OtherBookingModel>/isVisible'}" value="{path: 'AssignmentModel>/RecurringPerWeek'}"
+									valueStateText="{i18n>ENTER_RECUR_WEEKS_ERROR}"/>
+								<Label text="{i18n>OTHER_BOOKING_WEEKS}" class="weekLabel" visible="{path: 'OtherBookingModel>/isVisible'}"/>
+							</HBox>
+						</VBox>
+						<VBox class="hoursPerDayVbox">
+							<VBox class="helpHover">
+								<HBox>
+									<Label text="{i18n>ASSIGNMENT_ASSIGNED_DAYS}" required="true"
+										visible="{path: 'OtherBookingModel>/isVisible',formatter:'.enableAssignedDaysFormatter'}"/>
+									<help:MoreHelpLink showAsIcon="true" visible="{path: 'OtherBookingModel>/isVisible',formatter:'.enableAssignedDaysFormatter'}"
+										iconSrc="sap-icon://sys-help-2" helpId="TX" helpObj="/MRSS/RMUI5_OTHBOOK_ASG_DAYS"/>
+								</HBox>
+								<HBox>
+									<Input id="assignmentAssignedDaysInput" type="Text" width="17rem" liveChange="mrs.resourcemanagement.Util.Util.resetValueState"
+										value="{path : 'AssignmentModel>/Duration'}" valueStateText="{i18n>ENTER_ASSIGNED_DAYS_ERROR}"
+										visible="{path: 'OtherBookingModel>/isVisible',formatter:'.enableAssignedDaysFormatter'}"/>
+									<Label text="{AssignmentModel>/DurationUnitDescription}" class="durationUnitLabel sapUiTinyMarginBegin"
+										visible="{path: 'OtherBookingModel>/isVisible',formatter:'.enableAssignedDaysFormatter'}"/>
+								</HBox>
+							</VBox>
+						</VBox>
+						<VBox>
+							<HBox>
+								<CheckBox text="{i18n>MON}" selected="{OtherBookingModel>/Mon}" visible="{path: 'OtherBookingModel>/isVisible'}"/>
+								<CheckBox text="{i18n>TUE}" selected="{OtherBookingModel>/Tue}" visible="{path: 'OtherBookingModel>/isVisible'}"/>
+								<CheckBox text="{i18n>WED}" selected="{OtherBookingModel>/Wed}" visible="{path: 'OtherBookingModel>/isVisible'}"/>
+								<CheckBox text="{i18n>THU}" selected="{OtherBookingModel>/Thu}" visible="{path: 'OtherBookingModel>/isVisible'}"/>
+								<CheckBox text="{i18n>FRI}" selected="{OtherBookingModel>/Fri}" visible="{path: 'OtherBookingModel>/isVisible'}"/>
+								<CheckBox text="{i18n>SAT}" selected="{OtherBookingModel>/Sat}" visible="{path: 'OtherBookingModel>/isVisible'}"/>
+								<CheckBox text="{i18n>SUN}" selected="{OtherBookingModel>/Sun}" visible="{path: 'OtherBookingModel>/isVisible'}"/>
+							</HBox>
+						</VBox>
+						<VBox>
+							<HBox class="helpHover helpIcon">
+								<Label text="{i18n>OTHER_BOOKING_HOURS_PER_DAY}" class="hoursPerDayLabel" visible="{path: 'OtherBookingModel>/isVisible'}"/>
+								<Input type="Number" width="6rem" visible="{path: 'OtherBookingModel>/isVisible'}" value="{AssignmentModel>/NoofHoursPerDay}"
+									valueStateText="{i18n>ENTER_NO_OF_HOURS_PER_DAY}"
+									enabled="{path: 'OtherBookingModel>/FullWorkingDay',formatter:'.enableHrsPerDayFormatter'}"/>
+								<CheckBox text="{i18n>FULL_WORKING_DAY}" selected="{OtherBookingModel>/FullWorkingDay}" visible="{OtherBookingModel>/isVisible}"
+									class="fulldayCheckbox"/>
+								<help:MoreHelpLink showAsIcon="true" visible="{OtherBookingModel>/isVisible}" iconSrc="sap-icon://sys-help-2" helpId="TX"
+									helpObj="/MRSS/RMUI5_FULL_WORK_DAY"/>
+							</HBox>
+						</VBox>
+						
+						<CheckBox id="Delete_check" text="Delete all time allocations"/>
+						<VBox class="hoursPerDayVbox">
+							<VBox class="helpHover">
+								<custom:select.Select id="otherBookingTypeSelection1" class="requestCreateRequestSelect borderDropDown" width="50%" change="setAssignment"
+									items="{path: '/TimespecTypeValueListSet', filters:{path:'ResourceType', operator: 'EQ', value1:'00'}}">
+									<core:Item key="{VALUELISTKEY}" text="{VALUEDESCRIPTION}"/>
+								</custom:select.Select>
+								<custom:select.Select id="otherBookingTypeSelectionNN1" change="setAssignment" class="requestCreateRequestSelect borderDropDown" width="50%"
+									items="{path: '/TimespecTypeValueListSet', filters:{path:'ResourceType', operator: 'EQ', value1:'02'}}"
+									visible="{= ${CandidateModel>/PersonSet/ResourceType} === '02' ? true : false }">
+									<core:Item key="{VALUELISTKEY}" text="{VALUEDESCRIPTION}"/>
+								</custom:select.Select>
+								<!--<CheckBox id="Delete_check" text="Delete all time allocations" select="Delete_CheckboxPress"/>-->
+							</VBox>
+						</VBox>
+						</VBox>
+					
+					<VBox justifyContent="SpaceBetween" alignItems="Stretch" width="30%" height="16rem">
+						<VBox>
+							<Label text="{i18n>ASSIGNMENT_CANDIDATE_NAME}" class="bottomPaddingLabels"/>
+							<Label class="bottomPaddingLabels"
+								text="{parts: ['CandidateModel>/PersonSet/FullName', 'i18n>REQUEST_NO_VALUE'], formatter: 'mrs.resourcemanagement.Util.Util.defaultStringIfEmpty'}"/>
+						</VBox>
+						<VBox>
+							<Label text="Time Allocation Description"></Label>
+						<TextArea id="txtarea" width="300px" height="150px" value="{AssignmentModel>/OtherBookingTypeDesc}"/>
+						</VBox>
+						<VBox>
+							<!-- <Label text="{i18n>ASSIGNMENT_BOOKING_TYPE}" /> -->
+							<!-- <custom:select.Select class="requestCreateRequestSelect" selectedKey="{AssignmentModel>/BookingType}" 
+								items="{path: '/ValueListS et', filters:{path:'VALUELISTID', operator: 'EQ', 
+								value1:'BookingType'}}" > <core:Item key="{VALUELISTKEY}" text="{VALUEDESCRIPTION}" 
+								/> </custom:select.Select> -->
+							<!-- <Input id="assignmentBookingTitleInput" type="Text" width="15rem" 
+								value="{path : 'AssignmentModel>/BookingTitle'}"/> -->
+						</VBox>
+					</VBox>
+				</HBox>
+			</VBox>
+		</VBox>
+	</VBox>
+	<core:ExtensionPoint name="OtherBookingBottom"/>
+</core:View>

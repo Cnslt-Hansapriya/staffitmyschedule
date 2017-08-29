@@ -1,0 +1,187 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns="sap.m"
+	controllerName="mrs.resourcemanagement.view.assignment.CreateConcreteAssignment" xmlns:help="mrs.resourcemanagement.control.MoreHelpControl"
+	xmlns:custom="mrs.resourcemanagement.control" height="100%">
+	<core:ExtensionPoint name="CreateConcreteTop"/>
+	<VBox class="assignmentCreateRootContainer" fitContainer="true">
+		<HBox>
+			<core:Icon src="sap-icon://bo-strategy-management" class="assignmentHeaderIcon"></core:Icon>
+			<VBox>
+				<HBox>
+					<!-- <Label></Label> -->
+					<Input type="Text" class="genericTitleInput assignmentHeaderTitle" placeholder="{i18n>ASSIGNMENT_CONCRETE_DESCRIPTION_PLACEHOLDER}"
+						valueStateText="{i18n>ASSIGNMENT_CONCRETE_ERROR_DESCRIPTION}" width="30rem"
+						value="{ path : 'AssignmentModel>/LocalClientName', type : 'sap.ui.model.type.String', constraints : { minLength: 1, maxLength: 10000 } }"/>
+				</HBox>
+				<Label class="assignmentHeaderDescription" textAlign="Begin" text="{i18n>ASSIGNMENT_CONCRETE_DESCRIPTION}"></Label>
+			</VBox>
+		</HBox>
+		<core:ExtensionPoint name="CreateConcreteBeforeAssignmentDates"/>
+		<VBox justifyContent="SpaceBetween" class="assignmentCreateSectionContainer">
+			<HBox justifyContent="SpaceBetween" width="100%" height="100%">
+				<VBox justifyContent="SpaceBetween" alignItems="Stretch" width="33%" height="24.0em">
+					<VBox height="9.5em" justifyContent="SpaceBetween">
+						<VBox>
+							<Label text="{i18n>ASSIGNMENT_START_DATE}" required="true"/>
+							<DateRangeSelection valueStateText="{i18n>ENTER_VALID_DATE_RANGE_ERROR}" id="concreteStartEndDate"
+								delimiter="{i18n>START_END_DATE_DELIMITER}" dateValue="{path:'AssignmentModel>/StartDate'}"
+								secondDateValue="{path:'AssignmentModel>/EndDate'}" placeholder="{i18n>REQUEST_START_END_DATE_PLACEHOLDER}" change="updateAssignDays"
+								width="17em"/>
+						</VBox>
+						<!--<VBox>-->
+						<!--	<Label text="{i18n>ASSIGNMENT_STARTS_ON}"/>-->
+						<!--	<custom:select.Select class="requestCreateRequestSelect" selectedKey="{AssignmentModel>/StartsOnID}" items="{path: 'WeekdaysModel>/'}">-->
+						<!--		<core:Item key="{WeekdaysModel>key}" text="{WeekdaysModel>value}"/>-->
+						<!--	</custom:select.Select>-->
+						<!--</VBox>-->
+					</VBox>
+					<VBox>
+						<RadioButton id="radioButtonPerHour" text="{i18n>ASSIGNMENT_HOURS_PER_DAY}" tooltip="{i18n>ASSIGNMENT_HOURS_PER_DAY}"
+							selected="{AssignmentBusinessRules>/perHourSelected}" class="radioButtonIndented" select="onAssignmentRadioButtonSelect"/>
+						<Input id="assignmentHoursPerDayInput" type="Number" placeholder="" width="15rem" valueStateText="" change="onHoursPerDayChange"
+							enabled="{path: 'AssignmentBusinessRules>/perHourSelected', formatter:'.enablePerHour'}" maxLength="2"
+							value="{ path : 'AssignmentModel>/NoofHoursPerDay', type : 'sap.ui.model.type.Number', constraints : { minLength: 0, maxLength: 1 } }"/>
+						<HBox>
+							<Label text="{i18n>ASSIGNMENT_LOW_HOURS}" class="roleSliderLabel"></Label>
+							<Slider id="assignmentHoursPerDaySlider" enabled="{path: 'AssignmentBusinessRules>/perHourSelected', formatter:'.enablePerHour'}"
+								value="{ path : 'AssignmentModel>/NoofHoursPerDay', type : 'sap.ui.model.type.String', constraints : { minLength: 0, maxLength: 1 } }"
+								width="13em" min="0" max="8" liveChange="onHoursPerDayChange"/>
+							<Label id="maxHoursLabel" text="{i18n>ASSIGNMENT_UPPER_HOURS}" class="roleSliderLabel"></Label>
+						</HBox>
+					</VBox>
+				</VBox>
+				<core:ExtensionPoint name="CreateConcreteBeforeCandidates"/>
+				<VBox justifyContent="SpaceBetween" alignItems="Start" width="30%">
+					<VBox height="4.4rem">
+						<Label text="{i18n>ASSIGNMENT_CANDIDATE_NAME}" class="bottomPaddingLabels"/>
+						<Label
+							text="{parts: ['CandidateModel>/PersonSet/FullName', 'i18n>REQUEST_NO_VALUE'], formatter: 'mrs.resourcemanagement.Util.Util.defaultStringIfEmpty'}"/>
+					</VBox>
+					<VBox>
+						<Label text="{i18n>ASSIGNMENT_SETTLEMENT_TYPE}"/>
+						<custom:select.Select class="requestCreateRequestSelect" selectedKey="{AssignmentModel>/SettlementType}"
+							items="{path: '/ValueListSet', filters:{path:'VALUELISTID', operator: 'EQ', value1:'SettlementType'}}">
+							<core:Item key="{VALUELISTKEY}" text="{VALUEDESCRIPTION}"/>
+						</custom:select.Select>
+					</VBox>
+					<VBox>
+						<VBox class="helpHover">
+							<HBox>
+								<Label text="{i18n>ASSIGNMENT_BOOKING_TYPE}" class="bottomPaddingLabels"/>
+								<help:MoreHelpLink showAsIcon="true" iconSrc="sap-icon://sys-help-2" helpId="TX" helpObj="/MRSS/RMUI5_CONCR_ASG_BOOKTY"/>
+							</HBox>
+							<Label
+								text="{parts: ['AssignmentModel>/BookingTypeDesc', 'i18n>REQUEST_NO_VALUE'], formatter: 'mrs.resourcemanagement.Util.Util.defaultStringIfEmpty'}"/>
+						</VBox>
+					</VBox>
+					<VBox>
+						<RadioButton id="assignmentWeekdayRadioButton" text="{i18n>ASSIGNMENT_WEEKDAYS}" tooltip="{i18n>ASSIGNMENT_WEEKDAYS}"
+							class="radioButtonIndented" select="onAssignmentRadioButtonSelect"/>
+						<HBox id="weekdaysSelection" justifyContent="SpaceBetween" alignItems="Start">
+							<VBox justifyContent="Center" alignItems="Center" width="2rem">
+								<custom:DayPicker
+									enabled="{parts:[{path:'AssignmentBusinessRules>/perHourSelected'},{path:'AssignmentBusinessRules>/isDisabled'}], formatter:'.invertStateFormatter'}"
+									state="{path: 'AssignmentModel>/Weekday_Monday', formatter:'.stateFormatter'}" press="onMondayPressed"></custom:DayPicker>
+								<Label text="{i18n>ASSIGNMENT_WEEKDAY_MONDAY}"/>
+							</VBox>
+							<VBox justifyContent="Center" alignItems="Center" width="2rem">
+								<custom:DayPicker
+									enabled="{parts:[{path:'AssignmentBusinessRules>/perHourSelected'},{path:'AssignmentBusinessRules>/isDisabled'}], formatter:'.invertStateFormatter'}"
+									state="{path: 'AssignmentModel>/Weekday_Tuesday', formatter:'.stateFormatter'}" press="onTuesdayPressed"></custom:DayPicker>
+								<Label text="{i18n>ASSIGNMENT_WEEKDAY_TUESDAY}"/>
+							</VBox>
+							<VBox justifyContent="Center" alignItems="Center" width="2rem">
+								<custom:DayPicker
+									enabled="{parts:[{path:'AssignmentBusinessRules>/perHourSelected'},{path:'AssignmentBusinessRules>/isDisabled'}], formatter:'.invertStateFormatter'}"
+									state="{path: 'AssignmentModel>/Weekday_Wednesday', formatter:'.stateFormatter'}" press="onWednesdayPressed"></custom:DayPicker>
+								<Label text="{i18n>ASSIGNMENT_WEEKDAY_WEDNESDAY}"/>
+							</VBox>
+							<VBox justifyContent="Center" alignItems="Center" width="2rem">
+								<custom:DayPicker
+									enabled="{parts:[{path:'AssignmentBusinessRules>/perHourSelected'},{path:'AssignmentBusinessRules>/isDisabled'}], formatter:'.invertStateFormatter'}"
+									state="{path: 'AssignmentModel>/Weekday_Thursday', formatter:'.stateFormatter'}" press="onThursdayPressed"></custom:DayPicker>
+								<Label text="{i18n>ASSIGNMENT_WEEKDAY_THURSDAY}"/>
+							</VBox>
+							<VBox justifyContent="Center" alignItems="Center" width="2rem">
+								<custom:DayPicker
+									enabled="{parts:[{path:'AssignmentBusinessRules>/perHourSelected'},{path:'AssignmentBusinessRules>/isDisabled'}], formatter:'.invertStateFormatter'}"
+									state="{path: 'AssignmentModel>/Weekday_Friday', formatter:'.stateFormatter'}" press="onFridayPressed"></custom:DayPicker>
+								<Label text="{i18n>ASSIGNMENT_WEEKDAY_FRIDAY}"/>
+							</VBox>
+							<VBox justifyContent="Center" alignItems="Center" width="2rem">
+								<custom:DayPicker
+									enabled="{parts:[{path:'AssignmentBusinessRules>/perHourSelected'},{path:'AssignmentBusinessRules>/isDisabled'}], formatter:'.invertStateFormatter'}"
+									state="{path: 'AssignmentModel>/Weekday_Saturday', formatter:'.stateFormatter'}" press="onSaturdayPressed"></custom:DayPicker>
+								<Label text="{i18n>ASSIGNMENT_WEEKDAY_SATURDAY}"/>
+							</VBox>
+							<VBox justifyContent="Center" alignItems="Center" width="2rem">
+								<custom:DayPicker
+									enabled="{parts:[{path:'AssignmentBusinessRules>/perHourSelected'},{path:'AssignmentBusinessRules>/isDisabled'}], formatter:'.invertStateFormatter'}"
+									state="{path: 'AssignmentModel>/Weekday_Sunday', formatter:'.stateFormatter'}" press="onSundayPressed"></custom:DayPicker>
+								<Label text="{i18n>ASSIGNMENT_WEEKDAY_SUNDAY}"/>
+							</VBox>
+						</HBox>
+						<Text text="{i18n>ASSIGNMENT_WEEKDAYS_MESSAGE}" tooltip="{i18n>ASSIGNMENT_WEEKDAYS_MESSAGE}" maxLines="1" class="weekdaysMessage"
+							width="14rem"/>
+					</VBox>
+				</VBox>
+				<core:ExtensionPoint name="CreateConcreteBeforeRequestRole"/>
+				<VBox justifyContent="SpaceBetween" alignItems="Stretch" width="30%" height="21.0rem">
+					<VBox height="25%">
+						<Label text="{i18n>ASSIGNMENT_ROLE_NAME_NUMBER}" class="bottomPaddingLabels"/>
+						<Label text="{parts: ['AssignmentModel>/RoleName', 'AssignmentModel>/RoleNumber'], formatter: '.defaultSepFormatter'}"/>
+					</VBox>
+					<VBox height="25%">
+						<Label text="{i18n>ASSIGNMENT_REQUEST_NAME_NUMBER}" class="bottomPaddingLabels"/>
+						<Label text="{parts: ['AssignmentModel>/RequestName', 'AssignmentModel>/RequestNumber'], formatter: '.defaultSepFormatter'}"/>
+					</VBox>
+					<!--<VBox height="25%">-->
+					<!--	<VBox class="helpHover" height="3.5rem">-->
+					<!--		<HBox>-->
+					<!--			<Label text="{i18n>ASSIGNMENT_FOUR_BY_TEN}"/>-->
+					<!--			<help:MoreHelpLink id="helpIcon" showAsIcon="true" iconSrc="sap-icon://sys-help-2" helpId="TX" helpObj="/MRSS/RMUI5_410_INDICATOR"/>-->
+					<!--		</HBox>-->
+					<!--		<RadioButtonGroup columns="3" select="onFourByTenCheckBoxSelect"-->
+					<!--			selectedIndex="{path: 'AssignmentModel>/FourByTenIndicator', formatter: '.fourByTenIndicatorFormatter'}">-->
+					<!--			<buttons>-->
+					<!--				<RadioButton groupName="fourByTenIndicatorGroup" text="{i18n>ASSIGNMENT_FOUR_BY_TEN_INDICATOR_YES}"-->
+					<!--					tooltip="{i18n>ASSIGNMENT_FOUR_BY_TEN_INDICATOR_YES}"/>-->
+					<!--				<RadioButton groupName="fourByTenIndicatorGroup" text="{i18n>ASSIGNMENT_FOUR_BY_TEN_INDICATOR_NO}"-->
+					<!--					tooltip="{i18n>ASSIGNMENT_FOUR_BY_TEN_INDICATOR_NO}"/>-->
+					<!--			</buttons>-->
+					<!--		</RadioButtonGroup>-->
+					<!--	</VBox>-->
+					<!--</VBox>-->
+					<VBox height="25%">
+						<VBox class="helpHover" id="assignmentAssignedDaysBox">
+							<HBox>
+								<Label text="{i18n>ASSIGNMENT_ASSIGNED_DAYS}" required="true" class="bottomPaddingSmallLabels"/>
+								<help:MoreHelpLink showAsIcon="true" iconSrc="sap-icon://sys-help-2" helpId="TX" helpObj="/MRSS/RMUI5_CONCR_ASG_ASSGND"/>
+							</HBox>
+							<HBox class="unitHBox">
+								<Input id="assignmentAssignedDaysInput" type="Text" width="15rem" liveChange="mrs.resourcemanagement.Util.Util.resetValueState"
+									value="{path : 'AssignmentModel>/Duration'}" valueStateText="{i18n>ENTER_ASSIGNED_DAYS_ERROR}"/>
+								<Label text="{AssignmentModel>/DurationUnitDescription}"/>
+							</HBox>
+						</VBox>
+					</VBox>
+				</VBox>
+			</HBox>
+			<VBox>
+				<HBox class="helpHover">
+					<CheckBox id="displayTimeRulesConcreteCheck" text="{i18n>USE_TIME_RULES}" select="onConcreteCheckboxPress"
+						visible="{AssignmentModel>/HasTimeRule}"/>
+					<help:MoreHelpLink showAsIcon="true" visible="{AssignmentModel>/HasTimeRule}" class="assignmentHelp" iconSrc="sap-icon://sys-help-2"
+						helpId="TX" helpObj="/MRSS/RMUI5_USE_TIME_RULES"/>
+				</HBox>
+				<Button class="btnClass" id="displayTimeRules" text="{i18n>DISPLAY_TIME_RULES}" press="handlePopoverPress"
+					visible="{AssignmentModel>/HasTimeRule}"/>
+			</VBox>
+		</VBox>
+	</VBox>
+	<core:ExtensionPoint name="CreateConcreteBeforeBottom"/>
+</core:View>

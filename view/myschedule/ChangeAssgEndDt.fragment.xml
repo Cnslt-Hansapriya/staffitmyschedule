@@ -1,0 +1,22 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:custData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog>
+		<content>
+			
+					<VBox justifyContent="SpaceBetween" alignItems="Stretch"
+						width="33%" height="24.0em">
+						<VBox height="9.5em" justifyContent="SpaceBetween">
+							<VBox>
+								<Label text="New Assignment Start Date" required="true" />
+								<DatePicker valueStateText="{i18n>ENTER_VALID_DATE_RANGE_ERROR}"
+									id="sStartEndDate" dateValue="{path:'AssignmentModel>/StartDate'}"
+									placeholder="{i18n>REQUEST_START_END_DATE_PLACEHOLDER}" change="updateAssignDays"
+									width="17em" />
+							</VBox>
+						</VBox>
+						</VBox>
+						
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

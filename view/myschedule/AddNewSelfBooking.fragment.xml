@@ -1,0 +1,18 @@
+
+<core:FragmentDefinition
+        xmlns="sap.m"
+        xmlns:core="sap.ui.core">
+    <Popover     
+	    showHeader="false" 
+	    contentHeight="2rem"
+	    class="bluePopover"
+	    verticalScrolling="false"
+	    horizontalScrolling="false"
+	    placement="Top" >
+        <VBox width="100%">
+            <Button text="CREATE ASSIGNMENT" 
+            tooltip="CREATE ASSIGNMENT" 
+            press="onAddFromExistingProject" class="candidateLinkButton"/>
+        </VBox>
+    </Popover>
+</core:FragmentDefinition>

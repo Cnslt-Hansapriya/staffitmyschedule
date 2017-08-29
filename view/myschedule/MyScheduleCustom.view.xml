@@ -1,0 +1,7 @@
+<core:View xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" controllerName="mrs.resourcemanagement.view.myschedule.MySchedule"
+	xmlns:custom="mrs.resourcemanagement.control">
+	<core:mvc.XMLView id="MyScheduleFilterBarView" viewName="mrs.resourcemanagement.view.myschedule.MyScheduleFilterBar"/>
+	<l:HorizontalLayout id="calendarLayout1"/>
+	<!-- Extends the My Schedule view -->
+	<core:ExtensionPoint name="MyScheduleViewExtension"/>
+</core:View>

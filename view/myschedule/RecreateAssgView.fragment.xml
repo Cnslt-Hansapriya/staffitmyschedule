@@ -1,0 +1,33 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:custData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<Dialog>
+		<content>
+
+			<VBox justifyContent="Center" alignItems="Center">
+				<VBox>
+					<Title text="Role Name/Number"></Title>
+					<Input enabled="false" editable="false"></Input>
+				</VBox>
+				<VBox>
+					<Title text="Request Name/Number"></Title>
+					<Input enabled="false" editable="false"></Input>
+				</VBox>
+				<VBox>
+					<Title text="Candidate Name"></Title>
+					<Input enabled="false" editable="false"></Input>
+				</VBox>
+				<VBox>
+					<Title text="Booking Type"></Title>
+					<Input enabled="false" editable="false"></Input>
+				</VBox>
+				<VBox>
+					<Title text="Assignment Type"></Title>
+					<Input enabled="false" editable="false"></Input>
+				</VBox>
+			</VBox>
+
+
+		</content>
+	</Dialog>
+</core:FragmentDefinition>

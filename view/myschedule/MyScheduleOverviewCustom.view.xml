@@ -1,0 +1,22 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:View xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:custom="mrs.resourcemanagement.control"
+	controllerName="mrs.resourcemanagement.view.myschedule.MyScheduleOverview">
+	<Page title="Practitioner Schedule" enableScrolling="false" class="mainBackgroundColor">
+		<content>
+			<core:mvc.XMLView viewName="mrs.resourcemanagement.view.myschedule.MySchedule"/>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button text="Create Booking" type="Emphasized"
+					tooltip="{i18n>ASSIGNMENT_EDIT_CREATE_SELF_BOOKING_BUTTON}" class="buttonColor" press="onAddButtonPressed"/>
+				<!-- Extends the requests toolbar-->
+				<core:ExtensionPoint name="myScheduleToolBar"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</core:View>

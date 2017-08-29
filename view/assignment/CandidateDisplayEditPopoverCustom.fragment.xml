@@ -1,0 +1,68 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<core:FragmentDefinition xmlns="sap.m"
+                         xmlns:core="sap.ui.core">
+    <Popover id="CandidateDisplayPopover" class="bluePopover " showHeader="false" contentWidth="55rem"
+             placement="Auto">
+             
+        <Table items="{AssignmentDataModel>/results}">
+		<headerToolbar>
+			<Toolbar>
+				<Title class="lightText" />
+			</Toolbar>
+			<core:ExtensionPoint name="CandidateEditDisplayHeader" />
+		</headerToolbar>
+		<columns>
+		<Column
+			 hAlign="Center"
+			 demandPopin="true"
+			 width="40%" >
+			</Column>
+			<Column
+			 hAlign="Center"
+			 demandPopin="true" 
+			 width="60%">
+			</Column>
+			<Column
+			 hAlign="Center"
+			 demandPopin="true" 
+			 width="60%">
+			</Column>
+			<Column
+			 hAlign="Center"
+			 demandPopin="true"
+			 width="20%" >
+			</Column>
+			<Column
+			 hAlign="Center"
+			 demandPopin="true"
+			 width="20%" >
+			</Column>
+			
+			<core:ExtensionPoint name="CandidateEditDisplayColumn" />
+		</columns>
+		<items>
+		
+		<ColumnListItem>
+				<cells>
+						<ObjectIdentifier text="{AssignmentDataModel>RequestRoleNumber}" class="candidateDisplayAssignment" />
+						<Text
+						text="{AssignmentDataModel>AssignmentTypeDesc}" class="candidateDisplayAssignment"/>
+						<Text
+						text="{AssignmentDataModel>duration}" class="candidateDisplayDuration"/>
+						<Button id="edit1" icon="sap-icon://edit" class="roleHoverButtons" type="Transparent" press="onPopoverEditPress"
+						 tooltip="{i18n>ASSIGNMENT_EDIT_TEXT}" enabled="{parts: [{path: 'AssignmentDataModel>BookingType'}, {path: 'AssignmentDataModel>IsEditable'}], formatter: '.enableEditFormatter'}"/>
+						<Button icon="sap-icon://display" class="roleHoverButtons" type="Transparent" press="onPopoverDisplayPress"
+						 tooltip="{i18n>ASSIGNMENT_DISPLAY_TEXT}"/>
+				</cells>
+			</ColumnListItem>
+			</items>
+	</Table>
+        
+        
+        <core:ExtensionPoint name="AssignmentDisplayEditPopoverExtension"/>
+    </Popover>
+</core:FragmentDefinition>

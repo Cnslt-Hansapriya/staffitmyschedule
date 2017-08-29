@@ -1,0 +1,109 @@
+<!--
+
+    Copyright (C) 2009-2014 SAP SE or an SAP affiliate company. All rights reserved
+
+-->
+<mvc:View controllerName="mrs.resourcemanagement.view.myschedule.SelfBookingExistingProject" xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:table="sap.ui.table" xmlns="sap.m"
+	xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<NavContainer id="addAssigmentWizardNav" height="100%">
+		<pages>
+			<!--  <core:ExtensionPoint name="AssignmentWizardBeforeFirstPage" /> -->
+			<Page id="firstPage" title="New Assignment" >
+				<core:ExtensionPoint name="SelfBookingBeforeRequestRoleSelect"/>
+				<core:Fragment fragmentName="mrs.resourcemanagement.view.myschedule.SelfBookingRequestRoleInput" type="XML"/>
+				<core:ExtensionPoint name="SelfBookingAfterRequestRoleSelect"/>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button text="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CANCEL_BTN}" press="onCancelPress" tooltip="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CANCEL_TOOLTIP}"/>
+						<Button id="addAssignmentNextBtn1" text="{i18n>TEAM_SCHEDULE_ASSIGNMENT_NEXT_BTN}" tooltip="{i18n>TEAM_SCHEDULE_ASSIGNMENT_NEXT_TOOLTIP}"
+							type="Emphasized" press="onNavToLastPage" enabled="false" customData:assignmentType="{path: 'VALUELISTKEY', formatter: '.customDataFormatter'}"/>
+							<!--press="onNavToNextPage"-->
+					</Toolbar>
+				</footer>
+			</Page>
+			<Page id="nextPage" title="{i18n>MY_SCHEDULE_ASSIGNMENT_WIZARD_TITLE}" showNavButton="true" navButtonPress="handleBack" >
+				<content>
+					<List id="menuListId" class="assignmentCreateList" itemPress="handleNav" showNoData="true">
+						<StandardListItem class="assignmentCreateListItem" title="Concrete Assignment"
+							
+							iconDensityAware="false" iconInset="false" type="Navigation"
+							customData:assignmentType="{path: 'VALUELISTKEY', formatter: '.customDataFormatter'}"/>
+					</List>
+					<core:ExtensionPoint name="SelfBookingAfterCreateList"/>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button text="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CANCEL_BTN}" press="onCancelPress" tooltip="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CANCEL_TOOLTIP}"/>
+						<Button id="addAssignmentNextBtn2" text="{i18n>TEAM_SCHEDULE_ASSIGNMENT_NEXT_BTN}" tooltip="{i18n>TEAM_SCHEDULE_ASSIGNMENT_NEXT_TOOLTIP}"
+							enabled="false" type="Emphasized" press="onNavToLastPage"/>
+					</Toolbar>
+				</footer>
+			</Page>
+			<Page id="concreteAssignmentPage" title="{i18n>ASSIGNMENT_CONCRETE_NEW}" class="assignmentCreatePage" showNavButton="true"
+				navButtonPress="handleBack">
+				<content>
+					<core:mvc.XMLView id="concreteAssignment" viewName="mrs.resourcemanagement.view.assignment.CreateConcreteAssignment" height="100%"/>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button text="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CANCEL_BTN}" press="onCancelPress" tooltip="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CANCEL_TOOLTIP}"/>
+						<Button text="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CREATE_BTN}" type="Emphasized" tooltip="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CREATE_TOOLTIP}"
+							press="createConcreteAssignment"/>
+					</Toolbar>
+				</footer>
+			</Page>
+			<Page id="capacitiveAssignmentPage" title="{i18n>ASSIGNMENT_CAPACITIVE_NEW}" class="assignmentCreatePage" showNavButton="true"
+				navButtonPress="handleBack">
+				<content>
+					<core:mvc.XMLView id="capacitiveAssignment" viewName="mrs.resourcemanagement.view.assignment.CreateCapacitiveAssignment" height="100%"/>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button text="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CANCEL_BTN}" press="onCancelPress" tooltip="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CANCEL_TOOLTIP}"/>
+						<Button text="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CREATE_BTN}" type="Emphasized" tooltip="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CREATE_TOOLTIP}"
+							press="createCapacitiveAssignment"/>
+					</Toolbar>
+				</footer>
+			</Page>
+			<Page id="stretchedAssignmentPage" title="{i18n>ASSIGNMENT_STRETCHED_NEW}" class="assignmentCreatePage" showNavButton="true"
+				navButtonPress="handleBack">
+				<content>
+					<core:mvc.XMLView id="stretchedAssignment" viewName="mrs.resourcemanagement.view.assignment.CreateStretchedAssignment" height="100%"/>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+						<Button text="Delete" 
+							press="DeleteAssignment"/>
+						<Button text="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CANCEL_BTN}" press="onCancelPress" tooltip="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CANCEL_TOOLTIP}"/>
+						<Button text="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CREATE_BTN}" type="Emphasized" tooltip="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CREATE_TOOLTIP}"
+							press="createStretchAssignment"/>
+						
+							
+					</Toolbar>
+				</footer>
+			</Page>
+			<Page id="otherBookingPage" title="{i18n>ASSIGNMENT_OTHER_NEW}" class="assignmentCreatePage" showNavButton="true"
+				navButtonPress="handleBack">
+				<content>
+					<core:mvc.XMLView id="otherBooking" viewName="mrs.resourcemanagement.view.assignment.CreateOtherBooking" height="100%"/>
+				</content>
+				<footer>
+					<Toolbar>
+						<ToolbarSpacer/>
+							<Button text="Delete" press="DeleteOtherAssignment"/>
+						<Button text="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CANCEL_BTN}" press="onCancelPress" tooltip="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CANCEL_TOOLTIP}"/>
+						<Button text="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CREATE_BTN}" type="Emphasized" tooltip="{i18n>TEAM_SCHEDULE_ASSIGNMENT_CREATE_TOOLTIP}"
+							press="createOtherAssignment"/>
+					</Toolbar>
+				</footer>
+			</Page>
+			<core:ExtensionPoint name="SelfBookingAfterLastPage"/>
+		</pages>
+	</NavContainer>
+</mvc:View>
