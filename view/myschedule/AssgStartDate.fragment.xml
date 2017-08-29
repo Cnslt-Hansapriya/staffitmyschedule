@@ -17,7 +17,7 @@
 							</VBox>
 						</VBox>
 						<VBox binding="{/ProductCollection}">
-							<RadioButton groupName="workHours" text="Standard Working Hours" />
+							<RadioButton groupName="workHours" text="Standard Working Hours today" />
 							<VBox>
 								<RadioButton groupName="workHours"
 									text="Different work hours per day (repeated weekly)" selected="true" />
