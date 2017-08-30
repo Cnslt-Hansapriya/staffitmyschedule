@@ -128,6 +128,10 @@ sap.ui
 															var i = s
 																	.getBindingContext()
 																	.getObject();
+																	
+														// start: Changes by Hansapriya
+														
+														// end: Changes by Hansapriya
 															// if(sap.ui.getCore().getModel("globalModel"))
 															// var p =
 															// this._Parameter;
@@ -800,6 +804,9 @@ sap.ui
 						// );
 						// }
 						// this._selfregistrationView.byId("selfregistrationDialog").open();
+					},
+					_handleCancel:function(){
+							this._DialogAssgStart.close();
 					},
 					// end: Changes by Hansapriya
 					onEditAssignment : function(e) {
