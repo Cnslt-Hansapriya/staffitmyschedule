@@ -62,7 +62,7 @@
 							</VBox>
 						</VBox>
 					</VBox>
-					<VBox justifyContent="Center" class="sapUiMediumMarginEnd" alignItems="Center">
+					<VBox justifyContent="Center" class="sapUiMediumMarginEnd" alignItems="left">
 						<VBox class="sapUiSmallMarginBottom">
 							<Title text="Role Name/Number"></Title>
 							<!--<Input enabled="false" editable="false"></Input>-->
