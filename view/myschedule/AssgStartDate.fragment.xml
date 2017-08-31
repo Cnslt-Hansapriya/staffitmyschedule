@@ -63,29 +63,29 @@
 							</VBox>
 						</VBox>
 					</VBox>
-					<VBox justifyContent="Center" class="sapUiMediumMarginEnd" alignItems="Center">
-						<VBox>
+					<VBox justifyContent="Center" class="sapUiMediumMarginEnd" alignItems="left">
+						<VBox class="sapUiSmallMarginBottom">
 							<Title text="Role Name/Number"></Title>
 							<!--<Input enabled="false" editable="false"></Input>-->
 							<Text text="{details>/RoleName}" class="myStartDtCls"/>
 						</VBox>
-						<VBox>
+						<VBox class="sapUiSmallMarginBottom">
 							<Title text="Request Name/Number"></Title>
 							<!--<Input enabled="false" editable="false"></Input>-->
 							<Text text="{details>/RequestName}" class="myStartDtCls"/>
 						</VBox>
-						<VBox>
+						<VBox class="sapUiSmallMarginBottom">
 							<Title text="Candidate Name"></Title>
 							<!--<Input enabled="false" editable="false"></Input>-->
 						
 								<Text text="{CandidateModel>/PersonSet/FirstName} {CandidateModel>/PersonSet/LastName}" class="myStartDtCls"/>
 						</VBox>
-						<VBox>
+						<VBox class="sapUiSmallMarginBottom">
 							<Title text="Booking Type"></Title>
 							<!--<Input enabled="false" editable="false"></Input>-->
 							<Text text="{details>/BookingType}-{details>/BookingTypeDesc}" class="myStartDtCls"/>
 						</VBox>
-						<VBox>
+						<VBox class="sapUiSmallMarginBottom">
 							<Title text="Assignment Type"></Title>
 							<!--<Input enabled="false" editable="false"></Input>-->
 								<Text text="{details>/AssignmentType}-{details>/AssignmentTypeDesc}" class="myStartDtCls"/>

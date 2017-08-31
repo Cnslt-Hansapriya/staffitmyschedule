@@ -8,6 +8,6 @@
   },
   "deploy": {
     "destination": "MG2",
-    "name": "ZMRS_SCHEDULE_D"
+    "name": "ZMYSCHEDULE_H"
   }
 }
