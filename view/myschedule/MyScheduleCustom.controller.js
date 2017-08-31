@@ -811,6 +811,9 @@ sap.ui
 						// }
 						// this._selfregistrationView.byId("selfregistrationDialog").open();
 					},
+					onClose:function(){
+						this._DialogAssgStart=null;
+					},
 					// end: Changes by Hansapriya
 					onEditAssignment : function(e) {
 						// this._check1.oData = "1";

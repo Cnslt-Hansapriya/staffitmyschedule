@@ -2,7 +2,7 @@
 	xmlns:core="sap.ui.core"
 	xmlns:unified="sap.ui.unified"
 	xmlns:custData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-<Dialog title="Edit Assignment Hours">
+<Dialog title="Edit Assignment Hours" afterClose="onClose">
 		<content>
 <Panel>
 		<Panel>
