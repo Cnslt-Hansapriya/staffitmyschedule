@@ -36,10 +36,13 @@ sap.ui
 				this.aEditMod.refresh();
 
 				var oAssignMod = new sap.ui.model.json.JSONModel({
-					"vboxVisible": false
+					"vboxVisible": false,
+					"inboxEnable":false,
+					"rdBtnSel":false
 				});
 				this.getView().setModel(oAssignMod, "AssignmentModel");
 
+this.oAssignmentModel= this.getView().getModel("AssignmentModel");
 				// end: Changes by Hansapriya
 				this._eModel = new sap.ui.model.json.JSONModel();
 				var oModel = new sap.ui.model.json.JSONModel();
@@ -614,7 +617,7 @@ sap.ui
 								success: jQuery
 									.proxy(
 										function(D) {
-						5					var o = mrs.resourcemanagement.Util.DataPreparation
+											var o = mrs.resourcemanagement.Util.DataPreparation
 												.prepareAssignmentsForConsumption(D);
 											mrs.resourcemanagement.Util.Util
 												.hideBusyDialog();
@@ -800,8 +803,8 @@ sap.ui
 				// this._selfregistrationView.byId("selfregistrationDialog").open();
 			},
 			_handleCancel: function() {
-				var oAssignmentModel = this.getView().getModel("AssignmentModel");
-				oAssignmentModel.setProperty("/vboxVisible", false);
+			//	var oAssignmentModel = this.getView().getModel("AssignmentModel");
+				this.oAssignmentModel.setProperty("/vboxVisible", false);
 				this._DialogAssgStart.close();
 
 			},
@@ -812,10 +815,10 @@ sap.ui
 			_handleNewAssignStDt: function(evt) {
 				var odat = this.getView().getModel("AssignmentModel").getData();
 				var detDat = this.getView().getModel("details").getData();
-				var oAssignmentModel = this.getView().getModel("AssignmentModel");
+			//	var oAssignmentModel = this.getView().getModel("AssignmentModel");
 				if (new Date(odat.StartDate) > new Date(detDat.EndDate)) {
-					if (oAssignmentModel.getProperty("/vboxVisible")) {
-						oAssignmentModel.setProperty("/vboxVisible", false);
+					if (this.oAssignmentModel.getProperty("/vboxVisible")) {
+						this.oAssignmentModel.setProperty("/vboxVisible", false);
 					}
 					if (!this.pressDialog) {
 						this.pressDialog = new sap.m.Dialog({
@@ -839,9 +842,16 @@ sap.ui
 
 				} else if (new Date(detDat.StartDate) > new Date(odat.StartDate)) {
 
-					oAssignmentModel.setProperty("/vboxVisible", true);
+					this.oAssignmentModel.setProperty("/vboxVisible", true);
 				}
 
+			},
+			_handleRdBtnDiffWrk:function(evt){
+				if(this.oAssignmentModel.getProperty("/rdBtnSel")){
+				this.oAssignmentModel.setProperty("/inboxEnable", true);}
+				else{
+				this.oAssignmentModel.setProperty("/inboxEnable", false);	
+				}
 			},
 			// end: Changes by Hansapriya
 			onEditAssignment: function(e) {
