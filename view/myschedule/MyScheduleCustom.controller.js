@@ -814,9 +814,11 @@ sap.ui
 					_handleCancel:function(){
 						
 						this._DialogAssgStart.close();
+						
 					},
 					onClose:function(){
-						this._DialogAssgStart=null;
+					//	this._DialogAssgStart=null;
+						this._DialogAssgStart.destroy();
 					},
 					// end: Changes by Hansapriya
 					onEditAssignment  : function(e) {
