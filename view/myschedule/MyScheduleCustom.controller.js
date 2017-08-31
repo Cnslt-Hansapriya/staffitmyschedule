@@ -543,22 +543,22 @@ sap.ui
 					onExit : function() {
 						this.unsubscribeToEvents();
 						if (this.oEditAssignmenDialog) {
-							this.oEditAssignmenDialog.destroy();
+							this.oEditAssignmenDialog.destroy(true);
 						}
 						if (this.oAddAssignmentWizard) {
-							this.oAddAssignmentWizard.destroy();
+							this.oAddAssignmentWizard.destroy(true);
 						}
 						if (this.oShowDetailAssignment) {
-							this.oShowDetailAssignment.destroy();
+							this.oShowDetailAssignment.destroy(true);
 						}
 						if (this.oDisplayDialog) {
-							this.oDisplayDialog.destroy();
+							this.oDisplayDialog.destroy(true);
 						}
 						if (this.oEditAssignDialog) {
-							this.oEditAssignDialog.destroy();
+							this.oEditAssignDialog.destroy(true);
 						}
 						if (this._oAssignDialog) {
-							this._oAssignDialog.destroy();
+							this._oAssignDialog.destroy(true);
 						}
 					},
 					generateUUID : function() {
