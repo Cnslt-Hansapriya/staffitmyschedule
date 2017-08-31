@@ -1,152 +1,155 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:unified="sap.ui.unified"
-	xmlns:core="sap.ui.core" 
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:unified="sap.ui.unified"
 	xmlns:custData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog afterClose="onClose">
+<Dialog title="Edit Assignment Hours">
 		<content>
-		                                           <Panel>
-                                                          <Panel>
-                                                                        <FlexBox alignItems="Start">
-                                                                                      <items>
-                                                                                                     <Label text="25 Aug 2017">
-                                                                                                                   <layoutData>
-                                                                                                                                 <FlexItemData/>
-                                                                                                                   </layoutData>
-                                                                                                     </Label>
-                                                                                                     <Label text=" - ">
-                                                                                                                   <layoutData>
-                                                                                                                                 <FlexItemData/>
-                                                                                                                   </layoutData>
-                                                                                                     </Label>
-                                                                                                     <Label text="31 Aug 2017">
-                                                                                                                   <layoutData>
-                                                                                                                                 <FlexItemData growFactor="0.7"/>
-                                                                                                                   </layoutData>
-                                                                                                     </Label>
-                                                                                                     <Label text="Request Name/Request Number">
-                                                                                                                   <layoutData>
-                                                                                                                                 <FlexItemData growFactor="0.2"/>
-                                                                                                                   </layoutData>
-                                                                                                     </Label>
-                                                                                                     <Label text="Role Name/Role Number">
-                                                                                                                   <layoutData>
-                                                                                                                                 <FlexItemData/>
-                                                                                                                   </layoutData>
-                                                                                                     </Label>
-                                                                                      </items>
-                                                                        </FlexBox>
-                                                          </Panel>
-                                                          <Panel>
-                                                                        <FlexBox alignItems="Start">
-                                                                                      <items>
-                                                                                                     <Label text="Edit Assignment Hours">
-                                                                                                                   <layoutData>
-                                                                                                                                 <FlexItemData growFactor="0.56"/>
-                                                                                                                   </layoutData>
-                                                                                                     </Label>
-                                                                                                     <Label text="*" class="textGreen">
-                                                                                                                   <layoutData>
-                                                                                                                                 <FlexItemData/>
-                                                                                                                   </layoutData>
-                                                                                                     </Label>
-                                                                                                     <Label text="Edited Hours">
-                                                                                                                   <layoutData>
-                                                                                                                                 <FlexItemData growFactor="0.29"/>
-                                                                                                                   </layoutData>
-                                                                                                     </Label>
-                                                                                                     <Label text="*" class="textBlue">
-                                                                                                                   <layoutData>
-                                                                                                                                 <FlexItemData/>
-                                                                                                                   </layoutData>
-                                                                                                     </Label>
-                                                                                                     <Label text="Current Hours">
-                                                                                                                   <layoutData>
-                                                                                                                                 <FlexItemData/>
-                                                                                                                   </layoutData>
-                                                                                                     </Label>
-                                                                                      </items>
-                                                                        </FlexBox>
-                                                          </Panel>
-                                                          <HBox>
-                                                                        <VBox width="30%">
-                                                                                      <Label text="Assignment Hours" class="alignTbar"/>
-                                                                                      <Toolbar>
-                                                                                                     <Label text="Local Client Name"/>
-                                                                                                     <Label text="Booking Type"/>
-                                                                                                     <Button type="Emphasized" text="Clear All"/>
-                                                                                      </Toolbar>
-                                                                        </VBox>
-                                                                        <VBox id="mainVBox" width="85%" class="">
-                                                                                      <PlanningCalendar id="PC1" showRowHeaders="false" startDate="{path: '/startDate'}" viewKey="Week" rows="{path: '/people'}"
-                                                                                                    appointmentsVisualization="Filled" appointmentSelect="handleAppointmentSelect" intervalSelect="handleIntervalSelect"
-                                                                                                    showEmptyIntervalHeaders="false">
-                                                                                                     <rows>
-                                                                                                                   <PlanningCalendarRow appointments="{appointments}" intervalHeaders="{headers}">
-                                                                                                                                 <appointments>
-                                                                                                                                                <unified:CalendarAppointment>
-                                                                                                                                                               <!--        startDate="{start}"
-                                                                                                     endDate="{end}"
-                                                                                                     icon="{pic}"
-                                                                                                     title="8"
-                                                                                                    text="9"
-                                                                                                     type="{type}"
-                                                                                                    tentative="{tentative}">-->
-                                                                                                                                                </unified:CalendarAppointment>
-                                                                                                                                 </appointments>
-                                                                                                                                 <intervalHeaders>
-                                                                                                                                                <unified:CalendarAppointment startDate="{start}" endDate="{end}" icon="{pic}" title="Header" type="{type}"></unified:CalendarAppointment>
-                                                                                                                                 </intervalHeaders>
-                                                                                                                   </PlanningCalendarRow>
-                                                                                                     </rows>
-                                                                                      </PlanningCalendar>
-                                                                                      <Table id="idProductsTable" inset="false" items="{ path: 'matModel>/'}">
-                                                                                                     <columns>
-                                                                                                                   <Column width=""></Column>
-                                                                                                                   <Column width=""></Column>
-                                                                                                                   <Column width=""></Column>
-                                                                                                                   <Column width="" demandPopin="true"></Column>
-                                                                                                                   <Column width="" demandPopin="true"></Column>
-                                                                                                                   <Column width="" demandPopin="true"></Column>
-                                                                                                                   <Column width="" demandPopin="true"></Column>
-                                                                                                     </columns>
-                                                                                                     <items>
-                                                                                                                   <ColumnListItem>
-                                                                                                                                 <cells>
-                                                                                                                                                <HBox>
-                                                                                                                                                               <Input value="{matModel>ProductId}" width="4rem" maxLength="2"/>
-                                                                                                                                                               <Text id="editHr01" class="editHrText" text="8"/>
-                                                                                                                                                </HBox>
-                                                                                                                                                <HBox>
-                                                                                                                                                               <Input value="{matModel>ProductId}" width="4rem" maxLength="2"/>
-                                                                                                                                                               <Text id="editHr02" class="editHrText" text="8"/>
-                                                                                                                                                </HBox>
-                                                                                                                                                <HBox>
-                                                                                                                                                               <Input value="{matModel>ProductId}" width="4rem" maxLength="2"/>
-                                                                                                                                                               <Text id="editHr03" class="editHrText" text="8"/>
-                                                                                                                                                </HBox>
-                                                                                                                                                <HBox>
-                                                                                                                                                               <Input value="{matModel>ProductId}" width="4rem" maxLength="2"/>
-                                                                                                                                                               <Text id="editHr04" class="editHrText" text="8"/>
-                                                                                                                                                </HBox>
-                                                                                                                                                <HBox>
-                                                                                                                                                               <Input value="{matModel>ProductId}" width="4rem" maxLength="2"/>
-                                                                                                                                                              <Text id="editHr05" class="editHrText" text="8"/>
-                                                                                                                                                </HBox>
-                                                                                                                                                <HBox>
-                                                                                                                                                               <Input value="{matModel>ProductId}" width="4rem" maxLength="2"/>
-                                                                                                                                                               <Text id="editHr06" class="editHrText" text="8"/>
-                                                                                                                                                </HBox>
-                                                                                                                                                <HBox>
-                                                                                                                                                               <Input value="{matModel>ProductId}" width="4rem" maxLength="2"/>
-                                                                                                                                                               <Text id="editHr07" class="editHrText" text="8"/>
-                                                                                                                                                </HBox>
-                                                                                                                                 </cells>
-                                                                                                                   </ColumnListItem>
-                                                                                                     </items>
-                                                                                      </Table>
-                                                                        </VBox>
-                                                          </HBox>
-                                           </Panel>
-
-		</content>
+<Panel>
+		<Panel>
+			<FlexBox alignItems="Start">
+				<items> 
+					<Label text="25 Aug 2017">
+						<layoutData>
+							<FlexItemData/>
+						</layoutData>
+					</Label>
+					<Label text=" - ">
+						<layoutData>
+							<FlexItemData/>
+						</layoutData>
+					</Label>
+					<Label text="31 Aug 2017">
+						<layoutData>
+							<FlexItemData growFactor="0.7"/>
+						</layoutData>
+					</Label>
+					<Label text="Request Name/Request Number">
+						<layoutData>
+							<FlexItemData growFactor="0.2"/>
+						</layoutData>
+					</Label>
+					<Label text="Role Name/Role Number">
+						<layoutData>
+							<FlexItemData/>
+						</layoutData>
+					</Label>
+				</items>
+			</FlexBox>
+		</Panel>
+		<Panel>
+			<FlexBox alignItems="Start">
+				<items>
+					<Label text="Edit Assignment Hours">
+						<layoutData>
+							<FlexItemData growFactor="0.56"/>
+						</layoutData>
+					</Label>
+					<Label text="*" class="textGreen">
+						<layoutData>
+							<FlexItemData />
+						</layoutData>
+						
+					</Label>
+					<Label text="Edited Hours">
+						<layoutData>
+							<FlexItemData growFactor="0.29"/>
+						</layoutData>
+					</Label>
+						<Label text="*" class="textBlue">
+						<layoutData>
+							<FlexItemData />
+						</layoutData>
+						
+					</Label>
+					<Label text="Current Hours">
+						<layoutData>
+							<FlexItemData/>
+						</layoutData>
+					</Label>
+				</items>
+			</FlexBox>
+		</Panel>
+		<HBox>
+			<VBox width="30%">
+				<Label text="Assignment Hours" class="alignTbar"/>
+				<Toolbar>
+					<Label text="Local Client Name"/>
+					<Label text="Booking Type"/>
+					<Button type="Emphasized" text="Clear All" />
+				</Toolbar>
+			</VBox>
+			<VBox id="mainVBox" width="85%" class="">
+				<PlanningCalendar id="PC1" showRowHeaders="false" startDate="{path: '/startDate'}" viewKey="Week" rows="{path: '/people'}"
+					appointmentsVisualization="Filled" appointmentSelect="handleAppointmentSelect" intervalSelect="handleIntervalSelect"
+					showEmptyIntervalHeaders="false">
+					<rows>
+						<PlanningCalendarRow appointments="{appointments}" intervalHeaders="{headers}">
+							<appointments>
+								<unified:CalendarAppointment>
+									<!--	startDate="{start}"
+							endDate="{end}"
+							icon="{pic}"
+							title="8"
+							text="9"
+							type="{type}"
+							tentative="{tentative}">-->
+								</unified:CalendarAppointment>
+							</appointments>
+							<intervalHeaders>
+								<unified:CalendarAppointment startDate="{start}" endDate="{end}" icon="{pic}" title="Header" type="{type}"></unified:CalendarAppointment>
+							</intervalHeaders>
+						</PlanningCalendarRow>
+					</rows>
+				</PlanningCalendar>
+				<Table id="idProductsTable" inset="false" items="{ path: 'matModel>/'}">
+					<columns>
+						<Column width=""></Column>
+						<Column width=""></Column>
+						<Column width=""></Column>
+						<Column width="" demandPopin="true"></Column>
+						<Column width="" demandPopin="true"></Column>
+						<Column width="" demandPopin="true"></Column>
+						<Column width="" demandPopin="true"></Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<HBox>
+									<Input value="{matModel>ProductId}" width="4rem" maxLength="2"/>
+									<Text id="editHr01" class="editHrText" text="8"/>
+								</HBox>
+								<HBox>
+									<Input value="{matModel>ProductId}" width="4rem" maxLength="2"/>
+									<Text id="editHr02" class="editHrText" text="8"/>
+								</HBox>
+								<HBox>
+									<Input value="{matModel>ProductId}" width="4rem" maxLength="2"/>
+									<Text id="editHr03" class="editHrText" text="8"/>
+								</HBox>
+								<HBox>
+									<Input value="{matModel>ProductId}" width="4rem" maxLength="2"/>
+									<Text id="editHr04" class="editHrText" text="8"/>
+								</HBox>
+								<HBox>
+									<Input value="{matModel>ProductId}" width="4rem" maxLength="2"/>
+									<Text id="editHr05" class="editHrText" text="8"/>
+								</HBox>
+								<HBox>
+									<Input value="{matModel>ProductId}" width="4rem" maxLength="2"/>
+									<Text id="editHr06" class="editHrText" text="8"/>
+								</HBox>
+								<HBox>
+									<Input value="{matModel>ProductId}" width="4rem" maxLength="2"/>
+									<Text id="editHr07" class="editHrText" text="8"/>
+								</HBox>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+	
+			</VBox>
+		</HBox>
+	</Panel>
+	</content>
 	</Dialog>
 </core:FragmentDefinition>
