@@ -1,22 +1,102 @@
 <core:FragmentDefinition xmlns="sap.m"
 	xmlns:core="sap.ui.core"
 	xmlns:custData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-	<Dialog title="Change Assignment End Date " afterClose="onClose">
+	<Dialog title="Change Assignment End Date" afterClose="onClose">
 		<content>
-			
-					<VBox justifyContent="SpaceBetween" alignItems="Stretch"
-						width="33%" height="24.0em">
-						<VBox height="9.5em" justifyContent="SpaceBetween">
+		<VBox justifyContent="SpaceBetween" class="assignmentCreateSectionContainer">
+				<VBox height="6em" class="sapUiMediumMarginBegin" justifyContent="SpaceBetween">
+					<VBox>
+						<Toolbar>
+							<Title text="Assignment Title" class="myAssgTitCls"/>
+						</Toolbar>
+						<!--<Text text="Assignment Title" class="myAssgTitCls"/>-->
+						<Text
+							text="Existing Assignment : From {path: 'details>/StartDate',formatter: 'mrs.resourcemanagement.Util.Util.defaultDateRangeFormatter'} to {path: 'details>/EndDate', formatter: 'mrs.resourcemanagement.Util.Util.defaultDateRangeFormatter'}"
+							class="myExistAssgCls"></Text>
+					</VBox>
+				</VBox>
+				<HBox justifyContent="SpaceBetween" width="100%" height="100%">
+					<VBox justifyContent="SpaceBetween" class="sapUiLargeMarginEnd" width="33%" height="15.0em">
+						<VBox height="7em" justifyContent="SpaceBetween">
 							<VBox>
-								<Label text="New Assignment Start Date" required="true" />
-								<DatePicker valueStateText="{i18n>ENTER_VALID_DATE_RANGE_ERROR}"
-									id="sStartEndDate" dateValue="{path:'AssignmentModel>/StartDate'}"
-									placeholder="{i18n>REQUEST_START_END_DATE_PLACEHOLDER}" change="updateAssignDays"
-									width="17em" />
+								<Label text="New Assignment End Date" required="true"/>
+								<DatePicker valueStateText="{i18n>ENTER_VALID_DATE_RANGE_ERROR}" dateValue="{path:'AssignmentModel>/StartDate'}"
+									placeholder="{i18n>REQUEST_START_END_DATE_PLACEHOLDER}" change="_handleNewAssignStDt" width="14em"/>
 							</VBox>
 						</VBox>
+						<VBox binding="{/ProductCollection}" width="167%" class="myRdBtnCls">
+							<!--class="myRdBtnCls"-margin-left: -10%;-->
+							<RadioButton groupName="workHours" text="Standard Working Hours"/>
+							<VBox>
+								<RadioButton groupName="workHours" text="Different work hours per day (repeated weekly)"/>
+								<HBox class="sapUiMediumPaddingBegin" justifyContent="SpaceBetween" alignItems="Start">
+									<!--padding-left: 13%;-->
+									<VBox justifyContent="Center" alignItems="Center" width="2rem">
+										<Input width="2.5rem"></Input>
+										<Label text="M"/>
+									</VBox>
+									<VBox justifyContent="Center" alignItems="Center" width="2rem">
+										<Input width="2.5rem"></Input>
+										<Label text="T"/>
+									</VBox>
+									<VBox justifyContent="Center" alignItems="Center" width="2rem">
+										<Input width="2.5rem"></Input>
+										<Label text="W"/>
+									</VBox>
+									<VBox justifyContent="Center" alignItems="Center" width="2rem">
+										<Input width="2.5rem"></Input>
+										<Label text="T"/>
+									</VBox>
+									<VBox justifyContent="Center" alignItems="Center" width="2rem">
+										<Input width="2.5rem"></Input>
+										<Label text="F"/>
+									</VBox>
+									<VBox justifyContent="Center" alignItems="Center" width="2rem">
+										<Input width="2.5rem"></Input>
+										<Label text="S"/>
+									</VBox>
+									<VBox justifyContent="Center" alignItems="Center" width="2rem">
+										<Input width="2.5rem"></Input>
+										<Label text="S"/>
+									</VBox>
+								</HBox>
+							</VBox>
 						</VBox>
+					</VBox>
+					<VBox justifyContent="Center" class="sapUiMediumMarginEnd" alignItems="left">
+						<VBox class="sapUiSmallMarginBottom">
+							<Title text="Role Name/Number"></Title>
+							<!--<Input enabled="false" editable="false"></Input>-->
+							<Text text="{details>/RoleName}" class="myStartDtCls"/>
+						</VBox>
+						<VBox class="sapUiSmallMarginBottom">
+							<Title text="Request Name/Number"></Title>
+							<!--<Input enabled="false" editable="false"></Input>-->
+							<Text text="{details>/RequestName}" class="myStartDtCls"/>
+						</VBox>
+						<VBox class="sapUiSmallMarginBottom">
+							<Title text="Candidate Name"></Title>
+							<!--<Input enabled="false" editable="false"></Input>-->
 						
+								<Text text="{CandidateModel>/PersonSet/FirstName} {CandidateModel>/PersonSet/LastName}" class="myStartDtCls"/>
+						</VBox>
+						<VBox class="sapUiSmallMarginBottom">
+							<Title text="Booking Type"></Title>
+							<!--<Input enabled="false" editable="false"></Input>-->
+							<Text text="{details>/BookingType}-{details>/BookingTypeDesc}" class="myStartDtCls"/>
+						</VBox>
+						<VBox class="sapUiSmallMarginBottom">
+							<Title text="Assignment Type"></Title>
+							<!--<Input enabled="false" editable="false"></Input>-->
+								<Text text="{details>/AssignmentType}-{details>/AssignmentTypeDesc}" class="myStartDtCls"/>
+						</VBox>
+					</VBox>
+				</HBox>
+			</VBox>
 		</content>
+		<buttons>
+			<Button text="Cancel" press="_handleCancel" ></Button>
+			<Button text="Save" press="_handleSave" ></Button>
+		</buttons>
 	</Dialog>
 </core:FragmentDefinition>

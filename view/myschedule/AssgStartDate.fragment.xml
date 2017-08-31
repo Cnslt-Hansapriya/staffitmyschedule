@@ -20,7 +20,7 @@
 						<VBox height="7em" justifyContent="SpaceBetween">
 							<VBox>
 								<Label text="New Assignment Start Date" required="true"/>
-								<DatePicker valueStateText="{i18n>ENTER_VALID_DATE_RANGE_ERROR}" id="sStartEndDate" dateValue="{path:'AssignmentModel>/StartDate'}"
+								<DatePicker valueStateText="{i18n>ENTER_VALID_DATE_RANGE_ERROR}" dateValue="{path:'AssignmentModel>/StartDate'}"
 									placeholder="{i18n>REQUEST_START_END_DATE_PLACEHOLDER}" change="_handleNewAssignStDt" width="14em"/>
 							</VBox>
 						</VBox>
@@ -29,7 +29,7 @@
 							<RadioButton groupName="workHours" text="Standard Working Hours"/>
 							<VBox>
 								<RadioButton groupName="workHours" text="Different work hours per day (repeated weekly)"/>
-								<HBox id="weekdaysSelection" class="sapUiMediumPaddingBegin" justifyContent="SpaceBetween" alignItems="Start">
+								<HBox class="sapUiMediumPaddingBegin" justifyContent="SpaceBetween" alignItems="Start">
 									<!--padding-left: 13%;-->
 									<VBox justifyContent="Center" alignItems="Center" width="2rem">
 										<Input width="2.5rem"></Input>
