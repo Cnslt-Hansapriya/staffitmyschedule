@@ -818,7 +818,7 @@ sap.ui
 						this._DialogAssgStart=null;
 					},
 					// end: Changes by Hansapriya
-					onEditAssignment : function(e) {
+					onEditAssignment  : function(e) {
 						// this._check1.oData = "1";
 						// sap.ui.getCore().setModel(this._check1,
 						// "check_model");
