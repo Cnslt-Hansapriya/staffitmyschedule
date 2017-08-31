@@ -811,6 +811,9 @@ sap.ui
 						// }
 						// this._selfregistrationView.byId("selfregistrationDialog").open();
 					},
+					_handleCancel:function(){
+						this._DialogAssgStart.close();
+					},
 					onClose:function(){
 						this._DialogAssgStart=null;
 					},
