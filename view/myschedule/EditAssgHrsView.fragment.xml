@@ -151,5 +151,9 @@
 		</HBox>
 	</Panel>
 	</content>
+	<buttons>
+			<Button text="Cancel" press="_handleCancel" ></Button>
+			<Button text="Save" press="_handleSave" ></Button>
+		</buttons>
 	</Dialog>
 </core:FragmentDefinition>
