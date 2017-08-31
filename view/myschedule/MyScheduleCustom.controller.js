@@ -817,9 +817,10 @@ sap.ui
 						
 					},
 					onClose:function(){
-					//	this._DialogAssgStart=null;
-						this._DialogAssgStart.destroy();
+						this._DialogAssgStart=null;
+					//	this._DialogAssgStart.destroy();
 					},
+					_handleNewAssignStDt:function(evt){},
 					// end: Changes by Hansapriya
 					onEditAssignment  : function(e) {
 						// this._check1.oData = "1";

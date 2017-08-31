@@ -21,7 +21,7 @@
 							<VBox>
 								<Label text="New Assignment Start Date" required="true"/>
 								<DatePicker valueStateText="{i18n>ENTER_VALID_DATE_RANGE_ERROR}" id="sStartEndDate" dateValue="{path:'AssignmentModel>/StartDate'}"
-									placeholder="{i18n>REQUEST_START_END_DATE_PLACEHOLDER}" change="updateAssignDays" width="14em"/>
+									placeholder="{i18n>REQUEST_START_END_DATE_PLACEHOLDER}" change="_handleNewAssignStDt" width="14em"/>
 							</VBox>
 						</VBox>
 						<VBox binding="{/ProductCollection}" width="167%" class="myRdBtnCls">
