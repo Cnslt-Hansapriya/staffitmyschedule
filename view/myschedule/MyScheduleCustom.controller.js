@@ -614,7 +614,7 @@ sap.ui
 								success: jQuery
 									.proxy(
 										function(D) {
-											var o = mrs.resourcemanagement.Util.DataPreparation
+						5					var o = mrs.resourcemanagement.Util.DataPreparation
 												.prepareAssignmentsForConsumption(D);
 											mrs.resourcemanagement.Util.Util
 												.hideBusyDialog();
