@@ -24,7 +24,7 @@
 									placeholder="{i18n>REQUEST_START_END_DATE_PLACEHOLDER}" change="_handleNewAssignStDt" width="14em"/>
 							</VBox>
 						</VBox>
-						<VBox binding="{/ProductCollection}" width="167%" class="myRdBtnCls">
+						<VBox binding="{/ProductCollection}" visible="{AssignmentModel>/vboxVisible}" width="167%" class="myRdBtnCls">
 							<!--class="myRdBtnCls"-margin-left: -10%;-->
 							<RadioButton groupName="workHours" text="Standard Working Hours"/>
 							<VBox>
